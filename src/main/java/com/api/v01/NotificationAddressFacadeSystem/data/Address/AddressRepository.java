@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
-    boolean existsByCustomerIdAndTypeIdAndText(Long customerId, Long addressTypeId, String text);
+    boolean existsByCustomerIdAndAddressTypeIdAndText(Long customerId, Long addressTypeId, String text);
 
 }

@@ -1,14 +1,12 @@
 package com.api.v01.NotificationAddressFacadeSystem.service.Relation;
 
-import com.api.v01.NotificationAddressFacadeSystem.data.Customer.Customer;
 import com.api.v01.NotificationAddressFacadeSystem.data.Relation.Relation;
 import com.api.v01.NotificationAddressFacadeSystem.data.Relation.RelationRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
+import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
+@Service
 public class RelationServiceImpl implements RelationService {
 
     private final RelationRepository relationRepository;
@@ -19,8 +17,8 @@ public class RelationServiceImpl implements RelationService {
     }
 
     @Override
-    public boolean existsByCustomerIdAndAddresTypeId(Long customerId, Long addresTypeId) {
-        return relationRepository.existsByCustomerIdAndAddressTypeId(customerId,addresTypeId);
+    public boolean existsByCustomerIdAndAddressTypeId(Long customerId, Long addressTypeId) {
+        return relationRepository.existsByCustomerIdAndAddressTypeId(customerId,addressTypeId);
     }
 
 

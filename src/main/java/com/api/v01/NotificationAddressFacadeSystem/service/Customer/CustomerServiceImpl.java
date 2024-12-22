@@ -6,11 +6,13 @@ import com.api.v01.NotificationAddressFacadeSystem.data.Relation.Relation;
 import com.api.v01.NotificationAddressFacadeSystem.data.Relation.RelationRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 @AllArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
@@ -50,11 +52,15 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public Customer addRelation(Long customerId, Long relationId) {
         Customer customer = findById(customerId).get();
-        customer.setRelationIds(List.of(relationId));
+        List<Long> relationIds = customer.getRelationIds();
+        relationIds.add(relationId);
+        customer.setRelationIds(relationIds);
+        customer.setUpdatedAt(LocalDateTime.now());
         return customerRepository.save(customer);
     }
 
     @Override
+    @Transactional
     public void deleteRelation(Long customerId, Long relationId) {
         Customer customer = findById(customerId).get();
         List<Long> updatedRelations = customer.getRelationIds();

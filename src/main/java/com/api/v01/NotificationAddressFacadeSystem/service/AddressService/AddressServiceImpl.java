@@ -2,27 +2,27 @@ package com.api.v01.NotificationAddressFacadeSystem.service.AddressService;
 
 import com.api.v01.NotificationAddressFacadeSystem.data.Address.Address;
 import com.api.v01.NotificationAddressFacadeSystem.data.Address.AddressRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
 @Service
+@AllArgsConstructor
 public class AddressServiceImpl implements AddressService {
 
-    @Autowired
-    private AddressRepository addressRepository;
+    private final AddressRepository addressRepository;
 
     @Transactional
     @Override
-    public Address save(Address address) {
+    public Address createAddress(Address address) {
         return addressRepository.save(address);
     }
 
     @Override
     public boolean checkIfAddressExists(Long customerId, Long addressTypeId, String text) {
-        return addressRepository.existsByCustomerIdAndTypeIdAndText(customerId, addressTypeId, text);
+        return addressRepository.existsByCustomerIdAndAddressTypeIdAndText(customerId, addressTypeId, text);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public boolean existsById(Long id) {
-        return addressRepository.existsById(id);
+        return !addressRepository.existsById(id);
     }
 
     @Override

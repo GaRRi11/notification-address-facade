@@ -20,6 +20,7 @@ public class NotificationLog {
     @Column(nullable = false,name = "notification_id")
     private Long notificationId;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false,name = "status")
     private Status status;
 

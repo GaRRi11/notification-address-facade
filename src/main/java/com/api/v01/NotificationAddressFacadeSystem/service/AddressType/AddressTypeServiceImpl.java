@@ -4,7 +4,9 @@ import com.api.v01.NotificationAddressFacadeSystem.data.AddressType.AddressType;
 import com.api.v01.NotificationAddressFacadeSystem.data.AddressType.AddressTypeRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @AllArgsConstructor
 public class AddressTypeServiceImpl implements AddressTypeService {
 
@@ -17,13 +19,8 @@ public class AddressTypeServiceImpl implements AddressTypeService {
     }
 
     @Override
-    public AddressType findById(Long id) {
-        return addressTypeRepository.findById(id).orElse(null);
-    }
-
-    @Override
     public boolean existsById(Long id) {
-        return addressTypeRepository.existsById(id);
+        return !addressTypeRepository.existsById(id);
     }
 
     @Override
