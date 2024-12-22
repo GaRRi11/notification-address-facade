@@ -23,26 +23,9 @@ public class RelationServiceImpl implements RelationService {
         return relationRepository.existsByCustomerIdAndAddressTypeId(customerId,addresTypeId);
     }
 
-    @Override
-    @Transactional
-    public void deleteRelation(Long customerId, Long relationId) {
-        Customer customer = findById(customerId).orElseThrow(() -> new RuntimeException("Customer not found"));
-        List<Long> relationIds = customer.getRelationIds();
-
-        if (!relationIds.contains(relationId)) {
-            throw new RuntimeException("Relation with id " + relationId + " is not associated with customer " + customerId);
-        }
-
-        relationIds.remove(relationId);
-        customer.setRelationIds(relationIds);
-        customerRepository.save(customer);
-    }
 
     @Override
-    @Transactional
-    public List<Relation> getAllRelations(Long customerId) {
-        Customer customer = findById(customerId).orElseThrow(() -> new RuntimeException("Customer not found"));
-        List<Long> relationIds = customer.getRelationIds();
-        return relationRepository.findAllById(relationIds);
+    public boolean existsById(Long id) {
+        return relationRepository.existsById(id);
     }
 }

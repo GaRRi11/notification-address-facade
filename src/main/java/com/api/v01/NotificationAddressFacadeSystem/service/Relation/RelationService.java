@@ -11,7 +11,5 @@ public interface RelationService {
 
     boolean existsByCustomerIdAndAddresTypeId(Long customerId, Long addresTypeId);
 
-    void deleteRelation(Long customerId, Long relationId);
-
-    List<Relation> getAllRelations(Long customerId);
+    boolean existsById(Long id);
 }

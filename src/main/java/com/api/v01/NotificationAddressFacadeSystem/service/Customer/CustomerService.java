@@ -1,6 +1,7 @@
 package com.api.v01.NotificationAddressFacadeSystem.service.Customer;
 
 import com.api.v01.NotificationAddressFacadeSystem.data.Customer.Customer;
+import com.api.v01.NotificationAddressFacadeSystem.data.Relation.Relation;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,4 +21,8 @@ public interface CustomerService {
     Customer updateUsername(Long id, String username);
 
     Customer addRelation(Long customerId, Long addressId);
+
+    void deleteRelation(Long customerId, Long addressId);
+
+    List<Relation> getAllRelations(Long customerId);
 }
