@@ -87,7 +87,7 @@ public class CustomerController {
 
     }
 
-    // Endpoint to delete a relation
+
     @DeleteMapping("/{customerId}/relations/{relationId}")
     public ResponseEntity<String> deleteRelation(@PathVariable Long customerId, @PathVariable Long relationId) {
         if (!customerService.findById(customerId).isPresent()) {
@@ -102,7 +102,7 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body("Relation with id " + relationId + " deleted successfully");
     }
 
-    // Endpoint to get all relations for a customer
+
     @GetMapping("/{customerId}/relations")
     public ResponseEntity<List<Relation>> getAllRelations(@PathVariable Long customerId) {
         if (!customerService.findById(customerId).isPresent()) {
@@ -112,5 +112,7 @@ public class CustomerController {
         List<Relation> relations = customerService.getAllRelations(customerId);
         return ResponseEntity.status(HttpStatus.OK).body(relations);
     }
+
+
 }
-}
+

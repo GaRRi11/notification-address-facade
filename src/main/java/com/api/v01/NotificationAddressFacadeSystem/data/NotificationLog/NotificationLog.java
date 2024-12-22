@@ -21,9 +21,11 @@ public class NotificationLog {
     private Long notificationId;
 
     @Column(nullable = false,name = "status")
-    private boolean status;
+    private Status status;
 
     @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
+
+
 
 }
