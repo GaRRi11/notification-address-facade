@@ -15,14 +15,13 @@ public class ApiKeyDTO {
 
     private boolean active;
 
-    private ApiKey fromDTO (ApiKeyDTO apiKeyDTO) {
-        ApiKey apiKey = ApiKey.builder()
+    public ApiKey fromDTO (ApiKeyDTO apiKeyDTO) {
+        return ApiKey.builder()
                 .key(apiKeyDTO.getKey())
                 .owner(apiKeyDTO.getOwner())
                 .createdAt(LocalDateTime.now())
                 .expiresAt(apiKeyDTO.getExpiresAt())
                 .active(apiKeyDTO.isActive())
                 .build();
-        return apiKey;
     }
 }

@@ -20,7 +20,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 30,updatable = true,name = "username")
+    @Column(nullable = false, unique = true, length = 50,name = "username")
     private String username;
 
     @JoinColumn(name = "customer_id")

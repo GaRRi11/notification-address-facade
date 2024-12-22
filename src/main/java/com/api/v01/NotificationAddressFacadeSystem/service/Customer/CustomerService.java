@@ -2,12 +2,12 @@ package com.api.v01.NotificationAddressFacadeSystem.service.Customer;
 
 import com.api.v01.NotificationAddressFacadeSystem.data.Customer.Customer;
 import com.api.v01.NotificationAddressFacadeSystem.data.Relation.Relation;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 public interface CustomerService {
 
     Optional<Customer> findByUsername(String username);

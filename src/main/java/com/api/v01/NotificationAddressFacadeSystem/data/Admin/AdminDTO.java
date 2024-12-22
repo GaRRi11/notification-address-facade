@@ -11,13 +11,12 @@ public class AdminDTO {
     private String username;
     private String password;
 
-    private Admin fromDTO(AdminDTO fromDTO) {
-        Admin admin = Admin.builder()
+    public Admin fromDTO(AdminDTO fromDTO) {
+        return Admin.builder()
                 .username(fromDTO.getUsername())
                 .password(fromDTO.getPassword())
                 .createdAt(LocalDateTime.now())
                 .build();
-        return admin;
     }
 
 }

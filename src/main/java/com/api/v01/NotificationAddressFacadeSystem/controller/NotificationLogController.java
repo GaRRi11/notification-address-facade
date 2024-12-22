@@ -2,6 +2,8 @@ package com.api.v01.NotificationAddressFacadeSystem.controller;
 
 import com.api.v01.NotificationAddressFacadeSystem.data.NotificationLog.NotificationLog;
 import com.api.v01.NotificationAddressFacadeSystem.service.NotificationLog.NotificationLogService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +25,14 @@ public class NotificationLogController {
     }
 
     @GetMapping("/logs/{customerId}")
-    public ResponseEntity<List<NotificationLog>> getCustomerLogs(@PathVariable Long customerId) {
+    public ResponseEntity<List<NotificationLog>> getCustomerLogs(
+            @PathVariable @Min(value = 1, message = "ID must be a positive number") Long customerId) {
         List<NotificationLog> logs = notificationLogService.getLogsByCustomerId(customerId);
         return ResponseEntity.ok(logs);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<NotificationLog> addLog(@RequestBody NotificationLog log) {
+    public ResponseEntity<NotificationLog> addLog(@Valid @RequestBody NotificationLog log) {
         NotificationLog savedLog = notificationLogService.addLog(log);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedLog);
     }
