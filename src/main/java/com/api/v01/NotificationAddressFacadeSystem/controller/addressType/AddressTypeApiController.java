@@ -1,8 +1,10 @@
-package com.api.v01.NotificationAddressFacadeSystem.controller;
+package com.api.v01.NotificationAddressFacadeSystem.controller.addressType;
 
 import com.api.v01.NotificationAddressFacadeSystem.data.AddressType.AddressType;
 import com.api.v01.NotificationAddressFacadeSystem.data.AddressType.AddressTypeDTO;
+import com.api.v01.NotificationAddressFacadeSystem.service.AddressService.AddressService;
 import com.api.v01.NotificationAddressFacadeSystem.service.AddressType.AddressTypeService;
+import com.api.v01.NotificationAddressFacadeSystem.service.Relation.RelationService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/address-type")
 @Validated
 @RestController
-public class AddressTypeController {
+public class AddressTypeApiController {
 
-    private AddressTypeService addressTypeService;
+    private final AddressTypeService addressTypeService;
+    private final AddressService addressService;
+    private final RelationService relationService;
 
     @PostMapping("/create")
     public ResponseEntity<AddressType> createAddressType(@Valid  @RequestBody AddressTypeDTO addressTypeDTO) {
@@ -36,6 +40,10 @@ public class AddressTypeController {
         if (addressTypeService.existsById(id)){
             throw new ClassCastException("AddressType with id: " + id + " does not exists");
         }
+
+        addressService.deleteByAddressTypeId(id);
+        relationService.deleteByAddressTypeId(id);
+
         addressTypeService.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("AddressType deleted successfully");
     }

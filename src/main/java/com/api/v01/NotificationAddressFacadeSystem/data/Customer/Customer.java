@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,10 +24,11 @@ public class Customer {
     @Column(nullable = false, unique = true, length = 50,name = "username")
     private String username;
 
-    @JoinColumn(name = "customer_id")
     @ElementCollection
     @Column(name = "relation_id")
-    private List<Long> relationIds;
+    private List<Long> relationIds = new ArrayList<>();
+
+
 
     @Column(nullable = false,name = "created_at")
     private LocalDateTime createdAt;

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Notification Log Management</title>
+</head>
+<body>
+<h1>Notification Logs</h1>
+
+<h2>Add Notification Log</h2>
+<form method="post" action="/api/v1/notifications/add">
+    <label>Message:</label><input type="text" name="message" required><br>
+    <label>Timestamp:</label><input type="datetime-local" name="timestamp" required><br>
+    <button type="submit">Add</button>
+</form>
+
+<h2>Statistics</h2>
+<a href="/api/v1/notifications/statistics">View Statistics</a>
+</body>
+</html>

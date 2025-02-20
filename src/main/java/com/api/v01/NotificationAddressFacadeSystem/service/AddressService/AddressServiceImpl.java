@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -43,4 +45,25 @@ public class AddressServiceImpl implements AddressService {
         address.setUpdatedAt(LocalDateTime.now());
         return addressRepository.save(address);
     }
+
+    @Override
+    public List<Address> getAllAddresses() {
+        return addressRepository.findAll();
+    }
+
+    @Override
+    public List<Address> findByCustomerId(Long customerId) {
+        return addressRepository.findByCustomerId(customerId);
+    }
+
+    @Override
+    public Optional<Address> findById(Long id) {
+        return addressRepository.findById(id);
+    }
+
+    @Override
+    public void deleteByAddressTypeId(Long id) {
+        addressRepository.deleteAllByAddressTypeId(id);
+    }
+
 }

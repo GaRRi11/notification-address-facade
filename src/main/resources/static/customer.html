@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Management</title>
+</head>
+<body>
+<h1>Customer Management</h1>
+
+<h2>Create Customer</h2>
+<form method="post" action="/api/customer/create">
+    <label>Username:</label><input type="text" name="username" required><br>
+    <label>Email:</label><input type="email" name="email" required><br>
+    <button type="submit">Create</button>
+</form>
+
+<h2>Update Customer Username</h2>
+<form method="post" action="/api/customer/{id}/update-username">
+    <label>Customer ID:</label><input type="number" name="id" required><br>
+    <label>New Username:</label><input type="text" name="username" required><br>
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>

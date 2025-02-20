@@ -1,9 +1,8 @@
-package com.api.v01.NotificationAddressFacadeSystem.controller;
+package com.api.v01.NotificationAddressFacadeSystem.controller.NotificationLog;
 
 import com.api.v01.NotificationAddressFacadeSystem.data.NotificationLog.NotificationLog;
 import com.api.v01.NotificationAddressFacadeSystem.service.NotificationLog.NotificationLogService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/notifications")
 @AllArgsConstructor
-public class NotificationLogController {
+public class NotificationLogApiController {
 
     private final NotificationLogService notificationLogService;
 
@@ -22,13 +21,6 @@ public class NotificationLogController {
     public ResponseEntity<List<Object[]>> getNotificationStatistics() {
         List<Object[]> stats = notificationLogService.getNotificationStatistics();
         return ResponseEntity.ok(stats);
-    }
-
-    @GetMapping("/logs/{customerId}")
-    public ResponseEntity<List<NotificationLog>> getCustomerLogs(
-            @PathVariable @Min(value = 1, message = "ID must be a positive number") Long customerId) {
-        List<NotificationLog> logs = notificationLogService.getLogsByCustomerId(customerId);
-        return ResponseEntity.ok(logs);
     }
 
     @PostMapping("/add")

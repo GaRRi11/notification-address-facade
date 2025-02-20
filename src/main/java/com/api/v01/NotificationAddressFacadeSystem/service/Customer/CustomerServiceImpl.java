@@ -3,7 +3,7 @@ package com.api.v01.NotificationAddressFacadeSystem.service.Customer;
 import com.api.v01.NotificationAddressFacadeSystem.data.Customer.Customer;
 import com.api.v01.NotificationAddressFacadeSystem.data.Customer.CustomerRepository;
 import com.api.v01.NotificationAddressFacadeSystem.data.Relation.Relation;
-import com.api.v01.NotificationAddressFacadeSystem.data.Relation.RelationRepository;
+import com.api.v01.NotificationAddressFacadeSystem.service.Relation.RelationService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
-    private final RelationRepository relationRepository;
+    private final RelationService relationService;
 
     @Override
     public Optional<Customer> findByUsername(String username) {
@@ -68,12 +68,21 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setRelationIds(updatedRelations);
         customer.setUpdatedAt(LocalDateTime.now());
         customerRepository.save(customer);
-        relationRepository.deleteById(relationId);
     }
 
     @Override
     public List<Relation> getAllRelations(Long customerId) {
-        return customerRepository.getAllRelations(customerId);
+        return relationService.findAllByCustomerId(customerId);
+    }
+
+    @Override
+    public void deleteCustomerById(Long id) {
+        customerRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Customer> findCustomersByIds(List<Long> customersIds) {
+       return customerRepository.findCustomersByIds(customersIds);
     }
 
 
